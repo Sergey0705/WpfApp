@@ -27,5 +27,17 @@ namespace WpfApp.ViewModels
             set => Set(ref _title, value);
         }
         #endregion
+
+        #region Status : string - Статус программы
+
+        private string _status = "Готов!";
+        /// <summary>Статус программы</summary>
+        public string Status
+        {
+            get => _status;
+            set => Set(ref _status, value);
+        }
+
+        #endregion
     }
 }
