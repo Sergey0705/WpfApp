@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
+using System.Windows.Input;
+using WpfApp.Infrastructure.Commands;
 using WpfApp.ViewModels.Base;
 
 namespace WpfApp.ViewModels
@@ -39,5 +42,31 @@ namespace WpfApp.ViewModels
         }
 
         #endregion
+
+        #region Команды
+
+        #region ClosedApplicationCommand
+
+        public ICommand CloseApplicationCommand { get; }
+
+        private bool CanCloseApplicationCommandExecuted(object p) => true;
+
+        private void OnCloseApplicationCommandExecuted(object p)
+        {
+            Application.Current.Shutdown();
+        }
+
+        #endregion
+
+        #endregion
+
+        public MainWindowViewModel()
+        {
+            #region Команды
+
+            CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecuted);
+
+            #endregion
+        }
     }
 }
