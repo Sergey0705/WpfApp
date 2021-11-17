@@ -4,12 +4,27 @@ using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using WpfApp.Infrastructure.Commands;
+using WpfApp.Models;
 using WpfApp.ViewModels.Base;
 
 namespace WpfApp.ViewModels
 {
    internal class MainWindowViewModel : ViewModel
    {
+        #region TestDataPoints
+
+        private IEnumerable<DataPoint> _testDataPoints;
+
+        /// <summary>Тестовый набор данных для визуализации графиков</summary>
+        public IEnumerable<DataPoint> TestDataPoints
+        {
+            get => _testDataPoints;
+            set => Set(ref _testDataPoints, value);
+        }
+
+
+        #endregion
+
         #region Заголовок окна
         private string _title = "Анализ статистики CV19";
        
@@ -67,6 +82,17 @@ namespace WpfApp.ViewModels
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecuted);
 
             #endregion
+
+            var data_points = new List<DataPoint>((int) (360 / 0.1));
+            for (var x = 0d; x <= 360; x += 0.1)
+            {
+                const double to_rad = Math.PI / 100;
+                var y = Math.Sin(x * to_rad);
+
+                data_points.Add(new DataPoint { XValue=x, YValue=y });
+            }
+
+            TestDataPoints = data_points;
         }
     }
 }

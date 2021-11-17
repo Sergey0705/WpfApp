@@ -78,7 +78,7 @@ namespace WpfAppConsole
             var russia_data = GetData()
                 .First(v => v.country.Equals("Russia", StringComparison.OrdinalIgnoreCase));
 
-            Console.WriteLine(string.Join("\r\n", GetDates().Zip(russia_data.counts, (date, count) => $"{date:dd:MM} - {count}")));
+            Console.WriteLine(string.Join("\r\n", GetDates().Zip(russia_data.counts, (date, count) => $"{date:dd.MM} - {count}")));
 
             Console.ReadLine();
         }
