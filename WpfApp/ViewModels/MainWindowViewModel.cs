@@ -154,7 +154,7 @@ namespace WpfApp.ViewModels
                 Name = $"Name {student_index}",
                 Surname = $"Surname {student_index}",
                 Patronymic = $"Patronymic {student_index++}",
-                Burthday = DateTime.Now,
+                Birthday = DateTime.Now,
                 Rating = 0
             });
 
