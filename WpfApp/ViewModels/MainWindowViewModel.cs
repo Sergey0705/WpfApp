@@ -11,6 +11,19 @@ namespace WpfApp.ViewModels
 {
    internal class MainWindowViewModel : ViewModel
    {
+        #region SelectedPageIndex
+
+        private int _selectedPageIndex;
+
+        public int SelectedPageIndex
+        {
+            get => _selectedPageIndex;
+            set => Set(ref _selectedPageIndex, value);
+        }
+
+        #endregion
+
+
         #region TestDataPoints
 
         private IEnumerable<DataPoint> _testDataPoints;
@@ -75,11 +88,28 @@ namespace WpfApp.ViewModels
 
         #endregion
 
+        #region 
+
+        public ICommand ChangeTabIndexCommand { get; }
+
+        private bool CanChangeTabIndexCommandExecute(object p) => _selectedPageIndex >= 0;
+
+        private void OnChangeTabIndexCommandExecuted(object p)
+        {
+            if (p is null) return;
+            SelectedPageIndex += Convert.ToInt32(p);
+        }
+
+
+        #endregion
+
         public MainWindowViewModel()
         {
             #region Команды
 
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecuted);
+            ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecuted, CanChangeTabIndexCommandExecute);
+
 
             #endregion
 
