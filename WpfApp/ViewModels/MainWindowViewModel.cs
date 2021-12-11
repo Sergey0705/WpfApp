@@ -18,6 +18,19 @@ namespace WpfApp.ViewModels
 
         public ObservableCollection<Group> Groups { get; }
 
+        #region SelectedGroup : Group - Выбранная группа
+
+        private Group _selectedGroup;
+
+        public Group SelectedGroup
+        {
+            get => _selectedGroup;
+            set => Set(ref _selectedGroup, value);
+        }
+
+
+        #endregion
+
         #region SelectedPageIndex
 
         private int _selectedPageIndex;
