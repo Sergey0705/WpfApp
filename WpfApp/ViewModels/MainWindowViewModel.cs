@@ -1,16 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using WpfApp.Infrastructure.Commands;
 using WpfApp.Models;
+using WpfApp.Models.Decanat;
 using WpfApp.ViewModels.Base;
 
 namespace WpfApp.ViewModels
 {
    internal class MainWindowViewModel : ViewModel
    {
+        /* ----------------------------------------------------- */
+
+        public ObservableCollection<Group> Groups { get; }
+
         #region SelectedPageIndex
 
         private int _selectedPageIndex;
@@ -71,7 +78,11 @@ namespace WpfApp.ViewModels
 
         #endregion
 
+        /* ----------------------------------------------------- */
+
         #region Команды
+
+        /* ----------------------------------------------------- */
 
         #region ClosedApplicationCommand
 
@@ -123,6 +134,24 @@ namespace WpfApp.ViewModels
             }
 
             TestDataPoints = data_points;
+
+            var student_index = 1;
+            var students = Enumerable.Range(1, 10).Select(i => new Student
+            { 
+                Name = $"Name {student_index}",
+                Surname = $"Surname {student_index}",
+                Patronymic = $"Patronymic {student_index++}",
+                Burthday = DateTime.Now,
+                Rating = 0
+            });
+
+            var groups = Enumerable.Range(1, 20).Select(i => new Group
+            {
+                Name = $"Группа{i}",
+                Students = new ObservableCollection<Student>(students)
+            });
+
+            Groups = new ObservableCollection<Group>(groups);
         }
     }
 }
