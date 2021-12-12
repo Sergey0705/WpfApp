@@ -18,6 +18,21 @@ namespace WpfApp.ViewModels
 
         public ObservableCollection<Group> Groups { get; }
 
+        public object[] CompositeCollection { get; }
+
+        #region SelectedCompositeValue : object - Выбранный непонятный элемент
+
+        private object _selectedCompositeValue;
+
+        public object SelectedCompositeValue
+        {
+            get => _selectedCompositeValue;
+            set => Set(ref _selectedCompositeValue, value);
+        }
+
+
+        #endregion
+
         #region SelectedGroup : Group - Выбранная группа
 
         private Group _selectedGroup;
@@ -30,6 +45,7 @@ namespace WpfApp.ViewModels
 
 
         #endregion
+
 
         #region SelectedPageIndex
 
@@ -165,6 +181,17 @@ namespace WpfApp.ViewModels
             });
 
             Groups = new ObservableCollection<Group>(groups);
+
+            var data_list = new List<object>();
+
+            data_list.Add("Hello World!");
+            data_list.Add(42);
+            var group = Groups[1];
+            data_list.Add(group);
+            data_list.Add(group.Students[0]);
+
+            CompositeCollection = data_list.ToArray();
+
         }
     }
 }
