@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:WpfAppTest"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+
+    </Window.Resources>
     <Grid>
         <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="118,78,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="checkBox" Content="CheckBox" HorizontalAlignment="Left" Margin="179,201,0,0" VerticalAlignment="Top"/>
