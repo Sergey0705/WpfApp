@@ -107,6 +107,14 @@ namespace WpfApp.ViewModels
 
         #endregion
 
+        public IEnumerable<Student> TestStudents => 
+            Enumerable.Range(1, App.IsDesignMode ? 10 : 100_000)
+            .Select(i => new Student
+            {
+                Name = $"Имя {i}",
+                Surname = $"Фамилия {i}"
+            });
+
         /* ----------------------------------------------------- */
 
         #region Команды
@@ -185,8 +193,6 @@ namespace WpfApp.ViewModels
 
         /* ----------------------------------------------------- */
 
-
-
         public MainWindowViewModel()
         {
             #region Команды
@@ -221,7 +227,7 @@ namespace WpfApp.ViewModels
 
             var groups = Enumerable.Range(1, 20).Select(i => new Group
             {
-                Name = $"Группа{i}",
+                Name = $"Группа {i}",
                 Students = new ObservableCollection<Student>(students)
             });
 
