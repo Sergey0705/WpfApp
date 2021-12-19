@@ -9,7 +9,7 @@
         xmlns:decanat="clr-namespace:WpfApp.Models.Decanat" 
         xmlns:l="clr-namespace:WpfApp"
         xmlns:oxy="http://oxyplot.org/wpf"
-        xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+        xmlns:sys="clr-namespace:System;assembly=System.Runtime" xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         Title="{Binding Path=Title}" 
         Height="450" Width="800">
     <Window.InputBindings>
@@ -45,7 +45,7 @@
             </StatusBarItem>
         </StatusBar>
         <TabControl SelectedIndex="{Binding Path=SelectedPageIndex}">
-            <TabItem Header="Тестирование визуализации">
+            <TabItem Header="Тестирование визуализации" Visibility="Collapsed">
                 <Grid>
                     <TextBlock Text="{Binding Source={x:Static l:App.IsDesignMode}}"/>
                     <ListBox HorizontalAlignment="Left" Width="200" Margin="30"
@@ -95,6 +95,9 @@
                                 <CollectionViewSource x:Key="GroupsCollection"
                                                       Source="{Binding Groups}"
                                                       Filter="GroupsCollecti_OnFilter"/>
+                                <!--<CollectionViewSource.SortDescriptions>
+                                    <cm:SortDescription PropertyName="Nmae" Direction="Descending"/>
+                                </CollectionViewSource.SortDescriptions>-->
                             </DockPanel.Resources>
                             <DockPanel DockPanel.Dock="Top" Margin="0,3">
                                 <fa:ImageAwesome Height="12" Icon="Solid_Search" Margin="3,0"/>
@@ -134,9 +137,9 @@
                         <DockPanel>
                             <DockPanel DockPanel.Dock="Top" Margin="0,3">
                                 <fa:ImageAwesome Height="12" Icon="Solid_Search" Margin="3,0"/>
-                                <TextBox />
+                                <TextBox Text="{Binding StudentFilterText, UpdateSourceTrigger=PropertyChanged}"/>
                             </DockPanel>
-                            <DataGrid ItemsSource="{Binding SelectedGroup.Students}"
+                            <DataGrid ItemsSource="{Binding SelectedGroupStudents}"
                                   AutoGenerateColumns="False"
                                   CanUserAddRows="True"
                                   GridLinesVisibility="Vertical"
@@ -149,6 +152,9 @@
                                         <VirtualizingStackPanel></VirtualizingStackPanel>
                                     </ItemsPanelTemplate>
                                 </DataGrid.ItemsPanel>-->
+                                <!--<DataGrid.GroupStyle>
+                                    <GroupStyle />
+                                </DataGrid.GroupStyle>-->
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}" Width="Auto"/>
                                     <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
