@@ -198,7 +198,51 @@
                                     DataFieldY="YValue"/>
                 </oxy:Plot>
             </TabItem>
-   
+            <TabItem Header="Файловая система">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Grid.Column="0" Header="Директории">
+                        <!--<ListBox ItemsSource="{Binding DiskRootDir.DirectoryItems}"
+                                 SelectedItem="{Binding SelectedDirectory}"
+                                 SelectedIndex="0">
+                    
+                        </ListBox>-->
+                        <TreeView ItemsSource="{Binding DiskRootDir.DirectoryItems}">
+                            <TreeView.ItemTemplate>
+                                <!--<DataTemplate DataType="vm:DirectoryViewModel">
+                                    <TextBlock Text="{Binding Name}" ToolTip="{Binding CreationTime}"/>
+                                </DataTemplate>-->
+                                <HierarchicalDataTemplate DataType="vm:DirectoryViewModel"
+                                                          ItemsSource="{Binding DirectoryItems}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <fa:ImageAwesome Height="12" Icon="Regular_Folder" Foreground="Yellow"/>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </TreeView.ItemTemplate>
+                        </TreeView>
+                    </GroupBox>
+                    <GroupBox Grid.Column="1" Header="Файлы">
+                        <ListBox ItemsSource="{Binding SelectedDirectory.Files, Mode=OneWay}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="vm:DirectoryViewModel">
+                                    <TextBlock Text="{Binding Name}" ToolTip="{Binding CreationTime}"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <!--<TreeView ItemsSource="{Binding DiskRootDir.DirectoryItems}">
+                            <TreeView.ItemTemplate>
+                                <DataTemplate DataType="vm:DirectoruViewModel">
+                                    <TextBlock Text="{Binding Name}" ToolTip="{Binding CreationTime}"/>
+                                </DataTemplate>
+                            </TreeView.ItemTemplate>
+                        </TreeView>-->
+                    </GroupBox>
+                </Grid>
+            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>

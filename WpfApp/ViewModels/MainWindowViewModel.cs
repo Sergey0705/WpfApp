@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -159,6 +158,23 @@ namespace WpfApp.ViewModels
                 Name = $"Имя {i}",
                 Surname = $"Фамилия {i}"
             });
+
+        public DirectoryViewModel DiskRootDir { get; } = new DirectoryViewModel("c:\\");
+
+        #region SelectedDirectory : DirectoryViewModel - Выбранная директория
+
+        private DirectoryViewModel _SelectedDirectory;
+
+        public DirectoryViewModel SelectedDirectory
+        {
+            get => _SelectedDirectory;
+            set
+            {
+                Set(ref _SelectedDirectory, value);       
+            }
+        }
+
+        #endregion
 
         /* ----------------------------------------------------- */
 
