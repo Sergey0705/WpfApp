@@ -6,7 +6,7 @@ namespace WpfApp.Models
 {
     internal struct ConfirmedCount
     {
-        public DateTime Data { get; set; }
+        public DateTime Date { get; set; }
         public int Count { get; set; }
     }
 }
