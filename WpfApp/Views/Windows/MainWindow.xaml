@@ -204,7 +204,7 @@
                         <ColumnDefinition Width="250"/>
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <GroupBox Grid.Column="0" Header="Директории">
+                    <!--<GroupBox Grid.Column="0" Header="Директории">
                         <GroupBox.Resources>
                             <HierarchicalDataTemplate DataType="{x:Type vm:DirectoryViewModel}"
                                                           ItemsSource="{Binding DirectoryItems}">
@@ -222,7 +222,7 @@
                         </GroupBox.Resources>
                         <TreeView ItemsSource="{Binding DiskRootDir.DirectoryItems}"/>
 
-                    </GroupBox>
+                    </GroupBox>-->
                     <!--<GroupBox Grid.Column="1" Header="Файлы">
                         <ListBox ItemsSource="{Binding SelectedDirectory.Files, Mode=OneWay}">
 
