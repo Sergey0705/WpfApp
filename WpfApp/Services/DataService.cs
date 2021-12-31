@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using WpfApp.Models;
@@ -26,7 +27,7 @@ namespace WpfApp.Services
 
         private static IEnumerable<string> GetDataLines()
         {
-            using var data_stream = GetDataStream().Result;
+            using var data_stream = Task.Run(GetDataStream).Result;
             using var data_reader = new StreamReader(data_stream);
 
             while (!data_reader.EndOfStream)
@@ -56,8 +57,8 @@ namespace WpfApp.Services
             {
                 var province = row[0].Trim();
                 var country_name = row[1].Trim(' ', '"');
-                var latitude = double.Parse(row[2]);
-                var longtitude = double.Parse(row[3]);
+                var latitude = double.Parse(row[5]);
+                var longtitude = double.Parse(row[6]);
                 var counts = row.Skip(5)
                     .Select(int.Parse).ToArray();
 

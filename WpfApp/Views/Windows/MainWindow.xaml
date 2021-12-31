@@ -8,6 +8,7 @@
         xmlns:cmd="clr-namespace:WpfApp.Infrastructure.Commands"
         xmlns:decanat="clr-namespace:WpfApp.Models.Decanat" 
         xmlns:l="clr-namespace:WpfApp"
+        xmlns:view="clr-namespace:WpfApp.Views"
         xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:sys="clr-namespace:System;assembly=System.Runtime" xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         Title="{Binding Path=Title}" 
@@ -44,42 +45,9 @@
                 <ProgressBar Width="120" Height="14" Value="30"/>
             </StatusBarItem>
         </StatusBar>
-        <TabControl SelectedIndex="{Binding Path=SelectedPageIndex}">
-            <TabItem Header="Тестирование визуализации" Visibility="Collapsed">
-                <Grid>
-                    <TextBlock Text="{Binding Source={x:Static l:App.IsDesignMode}}"/>
-                    <ListBox HorizontalAlignment="Left" Width="200" Margin="30"
-                             ItemsSource="{Binding TestStudents}"
-                             VirtualizingPanel.IsVirtualizing="True"
-                             VirtualizingPanel.VirtualizationMode="Recycling"
-                             VirtualizingPanel.IsContainerVirtualizable="True">
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel />
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate DataType="decanat:Student">
-                                <Border BorderBrush="Blue" BorderThickness="1" CornerRadius="3"
-                                        Padding="3">
-                                    <Border.CacheMode>
-                                        <BitmapCache RenderAtScale="5"/>
-                                    </Border.CacheMode>
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding Surname}" ToolTip="{Binding Name}"/>
-                                        <TextBlock Text="{Binding Name}" ToolTip="{Binding Name}"/>
-                                        <TextBlock Text="{Binding Patronymic, TargetNullValue=--}" ToolTip="{Binding Name}"/>
-                                    </StackPanel>
-                                </Border>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </Grid>
+        <TabControl>
+            <TabItem Header="Статистика">
+                <view:CountriesStatisticView />
             </TabItem>
             <TabItem Header="Студенты">
                 <Grid>
@@ -104,11 +72,10 @@
                                 <TextBox Name="GroupNameFilterText" TextChanged="OnGroupsFilterTextChanged"/>
                             </DockPanel>
                             <UniformGrid DockPanel.Dock="Bottom" Rows="1" Margin="0,3">
-                                <Button Content="Добавить" Padding="0,7" Style="{StaticResource CheckButtonStyle}" Command="{Binding CreateGroupCommand}"/>
-                                <Button Content="Удалить" Style="{StaticResource RemoveButtonStyle}" Command="{Binding DeleteGroupCommand}" CommandParameter="{Binding SelectedGroup}"/>
+                                <Button Content="Добавить" Padding="0,7" Style="{StaticResource CheckButtonStyle}" />
+                                <Button Content="Удалить" Style="{StaticResource RemoveButtonStyle}" />
                             </UniformGrid>
                             <ListBox ItemsSource="{Binding Source={StaticResource GroupsCollection}}" SelectedIndex="0"
-                                     SelectedItem="{Binding SelectedGroup}"
                                      VirtualizingPanel.IsContainerVirtualizable="True"
                                      VirtualizingPanel.IsVirtualizing="True"
                                      VirtualizingPanel.VirtualizationMode="Recycling">
@@ -197,38 +164,6 @@
                                     DataFieldX="XValue"
                                     DataFieldY="YValue"/>
                 </oxy:Plot>
-            </TabItem>
-            <TabItem Header="Файловая система">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="250"/>
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <!--<GroupBox Grid.Column="0" Header="Директории">
-                        <GroupBox.Resources>
-                            <HierarchicalDataTemplate DataType="{x:Type vm:DirectoryViewModel}"
-                                                          ItemsSource="{Binding DirectoryItems}">
-                                <StackPanel Orientation="Horizontal">
-                                    <fa:ImageAwesome Height="12" Icon="Regular_Folder" Foreground="Yellow"/>
-                                    <TextBlock Text="{Binding Name}"/>
-                                </StackPanel>
-                            </HierarchicalDataTemplate>
-                            <DataTemplate DataType="{x:Type vm:DirectoryViewModel}">
-                                <StackPanel Orientation="Horizontal" ToolTip="{Binding CreationTime}">
-                                    <fa:ImageAwesome Height="12" Icon="Regular_File" Foreground="Blue"/>
-                                    <TextBlock Text="{Binding Name}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </GroupBox.Resources>
-                        <TreeView ItemsSource="{Binding DiskRootDir.DirectoryItems}"/>
-
-                    </GroupBox>-->
-                    <!--<GroupBox Grid.Column="1" Header="Файлы">
-                        <ListBox ItemsSource="{Binding SelectedDirectory.Files, Mode=OneWay}">
-
-                        </ListBox>
-                    </GroupBox>-->
-                </Grid>
             </TabItem>
         </TabControl>
     </DockPanel>
