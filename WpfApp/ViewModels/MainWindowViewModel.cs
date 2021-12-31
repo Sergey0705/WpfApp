@@ -17,7 +17,9 @@ namespace WpfApp.ViewModels
    {
         /* ----------------------------------------------------- */
 
+        private readonly CountriesStatisticViewModel _CountriesStatistic;
 
+        /* ----------------------------------------------------- */
 
         #region SelectedFilteredText : string - Текст фильтра студентов
 
@@ -172,6 +174,8 @@ namespace WpfApp.ViewModels
 
         public MainWindowViewModel()
         {
+            _CountriesStatistic = new CountriesStatisticViewModel(this);
+
             #region Команды
 
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecuted);
