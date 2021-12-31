@@ -57,12 +57,12 @@ namespace WpfApp.Services
             {
                 var province = row[0].Trim();
                 var country_name = row[1].Trim(' ', '"');
-                var latitude = double.Parse(row[5]);
-                var longtitude = double.Parse(row[6]);
+                var latitude = double.Parse(row[3] == "" ? "0" : row[3], CultureInfo.InvariantCulture);
+                var longitude = double.Parse(row[4] == "" ? "0" : row[4], CultureInfo.InvariantCulture);
                 var counts = row.Skip(5)
                     .Select(int.Parse).ToArray();
 
-                yield return (province, country_name, (latitude, longtitude), counts);
+                yield return (province, country_name, (latitude, longitude), counts);
             }
         }
 
