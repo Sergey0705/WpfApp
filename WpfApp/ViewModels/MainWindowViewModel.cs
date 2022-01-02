@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Markup;
 using WpfApp.Infrastructure.Commands;
 using WpfApp.Models;
 using WpfApp.Models.Decanat;
@@ -13,6 +14,7 @@ using WpfApp.ViewModels.Base;
 
 namespace WpfApp.ViewModels
 {
+   [MarkupExtensionReturnType(typeof(MainWindowViewModel))]
    internal class MainWindowViewModel : ViewModel
    {
         /* ----------------------------------------------------- */
@@ -159,7 +161,8 @@ namespace WpfApp.ViewModels
 
         private void OnCloseApplicationCommandExecuted(object p)
         {
-            Application.Current.Shutdown();
+            (RootObject as Window)?.Close();
+            //Application.Current.Shutdown();
         }
 
         #endregion
