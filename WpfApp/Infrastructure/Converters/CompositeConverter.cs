@@ -3,15 +3,24 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Windows.Data;
+using System.Windows.Markup;
 
 namespace WpfApp.Infrastructure.Converters
 {
+    [MarkupExtensionReturnType(typeof(CompositeConverter))]
     internal class CompositeConverter : Converter
     {
-
+        [ConstructorArgument("First")]
         public IValueConverter First { get; set; }
 
+        [ConstructorArgument("Second")]
         public IValueConverter Second { get; set; }
+
+        public CompositeConverter() { }
+
+        public CompositeConverter(IValueConverter First) => this.First = First;
+
+        public CompositeConverter(IValueConverter First, IValueConverter Second) : this(First) => this.Second = Second;
 
         public override object Convert(object v, Type t, object p, CultureInfo c)
         {

@@ -8,6 +8,7 @@ using System.Windows.Markup;
 namespace WpfApp.Infrastructure.Converters
 {
     [ValueConversion(typeof(double), typeof(double))]
+    [MarkupExtensionReturnType(typeof(Linear))]
     /// <summary>
     /// Реаллизация линейного преобразования f(x) = k*x + b
     /// </summary>
