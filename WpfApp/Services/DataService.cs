@@ -77,7 +77,7 @@ namespace WpfApp.Services
                 var country = new CountryInfo
                 {
                     Name = country_info.Key,
-                    ProvinceCounts = country_info.Select(c => new PlaceInfo
+                    Provinces = country_info.Select(c => new PlaceInfo
                     {
                         Name = c.Province,
                         Location = new Point(c.Place.Lat, c.Place.Lon),
