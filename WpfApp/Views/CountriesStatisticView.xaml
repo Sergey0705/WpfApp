@@ -9,6 +9,7 @@
              xmlns:common="clr-namespace:WpfApp.Infrastructure.Common"
              xmlns:vm="clr-namespace:WpfApp.ViewModels"
              xmlns:oxy="http://oxyplot.org/wpf"
+             xmlns:map="clr-namespace:MapControl;assembly=MapControl.WPF"
              xmlns:local="clr-namespace:WpfApp"
              d:DataContext="{d:DesignInstance vm:CountriesStatisticViewModel,IsDesignTimeCreatable=True}"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -29,7 +30,7 @@
                         <TextBlock Text="Загрузить данные"/>
                     </StackPanel>
                 </Button>
-                <ListBox ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry, Mode=OneWay}">
+                <ListBox ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry, Mode=OneTime}">
                     <ListBox.ItemTemplate>
                         <DataTemplate DataType="m:CountryInfo">
                             <TextBlock>
@@ -83,6 +84,13 @@
                                     ItemsSource="{Binding SelectedCountry.Counts}"
                                     DataFieldX="Data" DataFieldY="Count"/>
                 </oxy:Plot>
+                <map:Map Grid.Row="1" ZoomLevel="4" MaxZoomLevel="21" Center="{Binding SelectedCountry.Location, Converter={c:PointToMapLocation}}">
+                    <map:MapScale Margin="4" Opacity="1" Background="Transparent" VerticalAlignment="Bottom"/>
+                    <map:MapGraticule Opacity="0.1" Background="Transparent"/>
+                    <map:Map.MapLayer>
+                        <map:MapTileLayer TileSource="http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png"/>
+                    </map:Map.MapLayer>
+                </map:Map>
             </Grid>
         </GroupBox>
     </Grid>
