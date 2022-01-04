@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using WpfApp.Services;
 using WpfApp.ViewModels;
@@ -38,7 +40,13 @@ namespace WpfApp
         internal static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
             services.AddSingleton<DataService>();
-            services.AddSingleton<CountriesStatisticViewModel>();
+            services.AddSingleton<CountriesStatisticViewModel>();      
         }
+
+        public static string CurrentDirectory => IsDesignMode
+            ? Path.GetDirectoryName(GetSourceCodePath())
+            : Environment.CurrentDirectory;
+
+        private static string GetSourceCodePath([CallerFilePath]string Path = null) => Path;
     }
 }
