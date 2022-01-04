@@ -19,9 +19,9 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="230"/>
-            <ColumnDefinition />
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <GridSplitter Panel.ZIndex="1000" />
+        <GridSplitter Panel.ZIndex="1000"/>
         <GroupBox Grid.Column="0" Header="Список стран">
             <DockPanel>
                 <Button DockPanel.Dock="Top" Command="{Binding RefreshDataCommand}">
@@ -30,17 +30,17 @@
                         <TextBlock Text="Загрузить данные"/>
                     </StackPanel>
                 </Button>
-                <ListBox ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry, Mode=OneTime}">
+                <ListBox ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry, Mode=OneWay}">
                     <ListBox.ItemTemplate>
                         <DataTemplate DataType="m:CountryInfo">
                             <TextBlock>
-                                <TextBlock Text="{Binding Name}" />
+                                <TextBlock Text="{Binding Name}"/>
                                 <TextBlock Text="{Binding Location, Converter={StaticResource LocationConverter}, StringFormat=({0})}"/>
                                 <!--<TextBlock>
                                     <TextBlock.Text>
                                         <Binding Path="Location" StringFormat="({0})">
                                             <Binding.Converter>
-                                                <c:LocationPointToStr />
+                                                <c:LocationPointToStr/>
                                             </Binding.Converter>
                                         </Binding>
                                     </TextBlock.Text>
@@ -55,9 +55,9 @@
             <Grid>
                 <Grid.Resources>
                     <sys:Double x:Key="Value3">3</sys:Double>
-                    
-                    <c:Ratio K="2" x:Key="Ratio2" />
-                    <c:Linear K="5" B="{StaticResource Value3}" x:Key="Linear K5 B3" />
+
+                    <c:Ratio K="2" x:Key="Ratio2"/>
+                    <c:Linear K="5" B="{StaticResource Value3}" x:Key="Linear_K5_B3"/>
 
                     <c:CompositeConverter x:Key="TestConverter">
                         <c:CompositeConverter.First>
@@ -71,8 +71,8 @@
                     <c:ToArray x:Key="ToArrayConverter"/>
                 </Grid.Resources>
                 <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <GridSplitter VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Panel.ZIndex="1000"/>
                 <oxy:Plot Grid.Row="0">
@@ -80,13 +80,13 @@
                         <oxy:LinearAxis Position="Left" Title="Число" MajorGridlineStyle="Solid" MinorGridlineStyle="Dash"/>
                         <oxy:DateTimeAxis Position="Bottom" Title="Дата" MajorGridlineStyle="Solid" MinorGridlineStyle="Dash"/>
                     </oxy:Plot.Axes>
-                    <oxy:LineSeries StrokeThickness="2" Color="Red"
+                    <oxy:LineSeries StrokeThickness="2" Color="Red" 
                                     ItemsSource="{Binding SelectedCountry.Counts}"
-                                    DataFieldX="Data" DataFieldY="Count"/>
+                                    DataFieldX="Date" DataFieldY="Count"/>
                 </oxy:Plot>
                 <map:Map Grid.Row="1" ZoomLevel="4" MaxZoomLevel="21" Center="{Binding SelectedCountry.Location, Converter={c:PointToMapLocation}}">
                     <map:MapScale Margin="4" Opacity="1" Background="Transparent" VerticalAlignment="Bottom"/>
-                    <map:MapGraticule Opacity="0.1" Background="Transparent"/>
+                    <map:MapGraticule Opacity="0.3" Background="Transparent"/>
                     <map:Map.MapLayer>
                         <map:MapTileLayer TileSource="http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png"/>
                     </map:Map.MapLayer>

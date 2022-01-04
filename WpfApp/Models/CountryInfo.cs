@@ -37,12 +37,12 @@ namespace WpfApp.Models
             {
                 if (_Counts != null) return _Counts;
 
-                var points_count = Provinces.FirstOrDefault()?.Counts?.Count();
+                var points_count = Provinces.FirstOrDefault()?.Counts?.Count() ?? 0;
                 if (points_count == 0) return Enumerable.Empty<ConfirmedCount>();
 
                 var province_points = Provinces.Select(p => p.Counts.ToArray()).ToArray();
 
-                var points = new ConfirmedCount[(int)points_count];
+                var points = new ConfirmedCount[points_count];
                 foreach (var province in province_points)
                     for (int i = 0; i < points_count; i++)
                     {
@@ -52,7 +52,7 @@ namespace WpfApp.Models
                             points[i].Count += province[i].Count;
                     }
 
-                return points;
+                return _Counts = points;
             }
             set => _Counts = value;
         }
