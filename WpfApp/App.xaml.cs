@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using WpfApp.Services;
+using WpfApp.Services.Interfaces;
 using WpfApp.ViewModels;
 
 namespace WpfApp
@@ -39,7 +40,7 @@ namespace WpfApp
 
         internal static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
-            services.AddSingleton<DataService>();
+            services.AddSingleton<IDataService, DataService>();
 
             services.AddSingleton<CountriesStatisticViewModel>();
             services.AddSingleton<MainWindowViewModel>();

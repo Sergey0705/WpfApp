@@ -186,17 +186,6 @@ namespace WpfApp.ViewModels
             ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecuted, CanChangeTabIndexCommandExecute);
 
             #endregion
-
-            var data_points = new List<DataPoint>((int) (360 / 0.1));
-            for (var x = 0d; x <= 360; x += 0.1)
-            {
-                const double to_rad = Math.PI / 100;
-                var y = Math.Sin(x * to_rad);
-
-                data_points.Add(new DataPoint { XValue=x, YValue=y });
-            }
-
-            TestDataPoints = data_points;
         }
     }
 }

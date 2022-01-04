@@ -7,13 +7,14 @@ using System.Windows.Input;
 using WpfApp.Infrastructure.Commands;
 using WpfApp.Models;
 using WpfApp.Services;
+using WpfApp.Services.Interfaces;
 using WpfApp.ViewModels.Base;
 
 namespace WpfApp.ViewModels
 {
     internal class CountriesStatisticViewModel : ViewModel
     {
-        private DataService _DataService;
+        private IDataService _DataService;
         public MainWindowViewModel MainModel { get; internal set; }
 
         #region Countries : IEnumerable<CountryInfo> - Статистика по странам
@@ -76,7 +77,7 @@ namespace WpfApp.ViewModels
         //        }).ToArray();
         //}
 
-        public CountriesStatisticViewModel(DataService DataService)
+        public CountriesStatisticViewModel(IDataService DataService)
         {
 
             _DataService = DataService;
