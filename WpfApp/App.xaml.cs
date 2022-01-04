@@ -40,7 +40,9 @@ namespace WpfApp
         internal static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
             services.AddSingleton<DataService>();
-            services.AddSingleton<CountriesStatisticViewModel>();      
+
+            services.AddSingleton<CountriesStatisticViewModel>();
+            services.AddSingleton<MainWindowViewModel>();
         }
 
         public static string CurrentDirectory => IsDesignMode

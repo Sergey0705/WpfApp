@@ -175,9 +175,10 @@ namespace WpfApp.ViewModels
 
         /* ----------------------------------------------------- */
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(CountriesStatisticViewModel Statistic)
         {
-            CountriesStatistic = new CountriesStatisticViewModel(this);
+            CountriesStatistic = Statistic;
+            Statistic.MainModel = this;
 
             #region Команды
 
