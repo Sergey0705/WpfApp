@@ -82,7 +82,7 @@
                     </oxy:Plot.Axes>
                     <oxy:LineSeries StrokeThickness="2" Color="Red"
                                     ItemsSource="{Binding SelectedCountry.Counts}"
-                                    DataFieldX="Data" DataFieldY="Count"/>
+                                    DataFieldX="Date" DataFieldY="Count"/>
                 </oxy:Plot>
                 <map:Map Grid.Row="1" ZoomLevel="4" MaxZoomLevel="21" Center="{Binding SelectedCountry.Location, Converter={c:PointToMapLocation}}">
                     <map:MapScale Margin="4" Opacity="1" Background="Transparent" VerticalAlignment="Bottom"/>
