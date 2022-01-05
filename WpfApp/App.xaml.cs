@@ -38,13 +38,10 @@ namespace WpfApp
             _Host = null;
         }
 
-        internal static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
-        {
-            services.AddSingleton<IDataService, DataService>();
-
-            services.AddSingleton<CountriesStatisticViewModel>();
-            services.AddSingleton<MainWindowViewModel>();
-        }
+        internal static void ConfigureServices(HostBuilderContext host, IServiceCollection services) => services
+                .RegisterServices()
+                .RegisterViewModels();
+     
 
         public static string CurrentDirectory => IsDesignMode
             ? Path.GetDirectoryName(GetSourceCodePath())

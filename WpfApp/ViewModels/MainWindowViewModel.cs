@@ -10,6 +10,7 @@ using System.Windows.Markup;
 using WpfApp.Infrastructure.Commands;
 using WpfApp.Models;
 using WpfApp.Models.Decanat;
+using WpfApp.Services.Interfaces;
 using WpfApp.ViewModels.Base;
 
 namespace WpfApp.ViewModels
@@ -17,6 +18,8 @@ namespace WpfApp.ViewModels
    [MarkupExtensionReturnType(typeof(MainWindowViewModel))]
    internal class MainWindowViewModel : ViewModel
    {
+        private readonly IAsyncDataService _AsyncData;
+
         /* ----------------------------------------------------- */
 
         public CountriesStatisticViewModel CountriesStatistic { get; }
@@ -175,7 +178,7 @@ namespace WpfApp.ViewModels
 
         /* ----------------------------------------------------- */
 
-        public MainWindowViewModel(CountriesStatisticViewModel Statistic)
+        public MainWindowViewModel(CountriesStatisticViewModel Statistic, IAsyncDataService AsyncData)
         {
             CountriesStatistic = Statistic;
             Statistic.MainModel = this;
