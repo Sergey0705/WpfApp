@@ -114,7 +114,7 @@ namespace WpfApp.ViewModels
         #region Status : string - Статус программы
 
         private string _status = "Готов!";
-        /// <summary>Статус программы</summary>
+       
         public string Status
         {
             get => _status;
@@ -123,16 +123,32 @@ namespace WpfApp.ViewModels
 
         #endregion
 
-        public IEnumerable<Student> TestStudents => 
-            Enumerable.Range(1, App.IsDesignMode ? 10 : 100_000)
-            .Select(i => new Student
-            {
-                Name = $"Имя {i}",
-                Surname = $"Фамилия {i}"
-            });
+        #region FuelCount : double - Количество непонятно чего
 
-   
-      
+        private string _FuelCount;
+
+        public string FuelCount
+        {
+            get => _FuelCount;
+            set => Set(ref _FuelCount, value);
+        }
+
+        #endregion
+
+
+        #region Coefficient : double - Коэффициент
+
+        private double _Coefficient = 1;
+
+        public double Coefficient
+        {
+            get => _Coefficient;
+            set => Set(ref _Coefficient, value);
+        }
+
+        #endregion
+
+
 
         /* ----------------------------------------------------- */
 

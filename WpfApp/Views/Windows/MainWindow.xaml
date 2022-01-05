@@ -10,6 +10,8 @@
         xmlns:l="clr-namespace:WpfApp"
         xmlns:view="clr-namespace:WpfApp.Views"
         xmlns:oxy="http://oxyplot.org/wpf"
+        xmlns:components="clr-namespace:WpfApp.Components"
+        xmlns:converters="clr-namespace:WpfApp.Infrastructure.Converters"
         xmlns:sys="clr-namespace:System;assembly=System.Runtime" xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         Title="{Binding Path=Title}"
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
@@ -51,7 +53,24 @@
                 <view:CountriesStatisticView DataContext="{Binding Path=CountriesStatistic}"/>
             </TabItem>
             <TabItem Header="Отладка">
-               
+                <Grid>
+                    <Grid.Resources>
+                        <converters:ParametricMultiplyValueConverter x:Key="Mult" Value="{Binding Coefficient}"/>
+                    </Grid.Resources>
+                    <components:GaugeIndicator VerticalAlignment="Top" HorizontalAlignment="Left"
+                                               Width="80" Height="80">
+                        <components:GaugeIndicator.Value>
+                            <Binding Path="FuelCount" Converter="{StaticResource Mult}"/>
+                        </components:GaugeIndicator.Value>
+                    </components:GaugeIndicator>
+                    <Slider VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="90,0,0,0" 
+                            Minimum="0" Maximum="100" Value="{Binding FuelCount}"
+                            ToolTip="{Binding FuelCount}"/>
+                    <Slider VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="90,40,0,0" 
+                            Minimum="-10" Maximum="10" SmallChange="0.1" 
+                            Value="{Binding Coefficient}"
+                            ToolTip="{Binding Coefficient}"/>
+                </Grid>
             </TabItem>
         </TabControl>
     </DockPanel>
