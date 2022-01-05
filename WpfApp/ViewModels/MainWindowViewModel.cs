@@ -114,11 +114,23 @@ namespace WpfApp.ViewModels
         #region Status : string - Статус программы
 
         private string _status = "Готов!";
-        /// <summary>Статус программы</summary>
+       
         public string Status
         {
             get => _status;
             set => Set(ref _status, value);
+        }
+
+        #endregion
+
+        #region FuelCount : double - Количество непонятно чего
+
+        private string _FuelCount;
+
+        public string FuelCount
+        {
+            get => _FuelCount;
+            set => Set(ref _FuelCount, value);
         }
 
         #endregion

@@ -10,6 +10,7 @@
         xmlns:l="clr-namespace:WpfApp"
         xmlns:view="clr-namespace:WpfApp.Views"
         xmlns:oxy="http://oxyplot.org/wpf"
+        xmlns:components="clr-namespace:WpfApp.Components"
         xmlns:sys="clr-namespace:System;assembly=System.Runtime" xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         Title="{Binding Path=Title}"
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
@@ -51,7 +52,12 @@
                 <view:CountriesStatisticView DataContext="{Binding Path=CountriesStatistic}"/>
             </TabItem>
             <TabItem Header="Отладка">
-               
+                <Grid>
+                    <components:GaugeIndicator VerticalAlignment="Top" HorizontalAlignment="Left"
+                                               Width="80" Height="80" Value="{Binding FuelCount}"/>
+                    <Slider VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="90,0,0,0" Height="30"
+                            Minimum="0" Maximum="100" Value="{Binding FuelCount}"/>
+                </Grid>
             </TabItem>
         </TabControl>
     </DockPanel>
