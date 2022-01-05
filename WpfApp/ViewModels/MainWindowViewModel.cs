@@ -78,6 +78,18 @@ namespace WpfApp.ViewModels
 
         #endregion
 
+        #region DataValue : string - Результат длительной асинхронной операции
+
+        private string _DataValue;
+
+        public string DataValue
+        {
+            get => _DataValue;
+            private set => Set(ref _DataValue, value);
+        }
+
+        #endregion
+
 
         #region TestDataPoints
 
@@ -170,9 +182,31 @@ namespace WpfApp.ViewModels
 
         #endregion
 
+        #region Command StartProcessCommand - Запуск процесса
 
+        public ICommand StartProcessCommand { get; }
 
- 
+        private static bool CanStartProcessCommandExecuted(object p) => true;
+
+        private void OnStartProcessCommandExecuted(object p)
+        {
+            DataValue = _AsyncData.GetResult(DateTime.Now);
+        }
+
+        #endregion
+
+        #region Command StopProcessCommand - Остановка процесса
+
+        public ICommand StopProcessCommand { get; }
+
+        private static bool CanStopProcessCommandExecuted(object p) => true;
+
+        private void OnStopProcessCommandExecuted(object p)
+        {
+
+        }
+
+        #endregion
 
         #endregion
 
@@ -180,6 +214,7 @@ namespace WpfApp.ViewModels
 
         public MainWindowViewModel(CountriesStatisticViewModel Statistic, IAsyncDataService AsyncData)
         {
+            _AsyncData = AsyncData;
             CountriesStatistic = Statistic;
             Statistic.MainModel = this;
 
@@ -187,6 +222,9 @@ namespace WpfApp.ViewModels
 
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecuted);
             ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecuted, CanChangeTabIndexCommandExecute);
+
+            StartProcessCommand = new LambdaCommand(OnStartProcessCommandExecuted, CanStartProcessCommandExecuted);
+            StopProcessCommand = new LambdaCommand(OnStopProcessCommandExecuted, CanStopProcessCommandExecuted);
 
             #endregion
         }

@@ -6,5 +6,6 @@ namespace WpfApp.Services.Interfaces
 {
     internal interface IAsyncDataService
     {
+        string GetResult(DateTime Time);
     }
 }
