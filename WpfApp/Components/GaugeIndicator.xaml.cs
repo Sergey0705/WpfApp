@@ -68,8 +68,8 @@ namespace WpfApp.Components
         [Description("Какой-то угол")]
         public double Angle
         {
-            get => (double)GetValue(ValueProperty);
-            set => SetValue(ValueProperty, value);
+            get => (double)GetValue(AngelProperty);
+            set => SetValue(AngelProperty, value);
         }
 
         #endregion
