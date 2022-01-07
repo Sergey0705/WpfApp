@@ -12,8 +12,9 @@ namespace WpfApp.Services
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
             services.AddSingleton<IDataService, DataService>();
+
             services.AddTransient<IAsyncDataService, AsyncDataService>();
-            services.AddSingleton<WebServerViewModel>();
+            services.AddTransient<IWebServerService, HttpListenerWebService>();
 
             return services;
         }

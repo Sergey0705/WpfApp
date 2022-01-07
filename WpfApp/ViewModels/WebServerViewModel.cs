@@ -1,11 +1,14 @@
 ﻿using System.Windows.Input;
 using WpfApp.Infrastructure.Commands;
+using WpfApp.Services.Interfaces;
 using WpfApp.ViewModels.Base;
 
 namespace WpfApp.ViewModels
 {
     internal class WebServerViewModel : ViewModel
     {
+        private readonly IWebServerService _Server;
+
         #region Enabled
 
         private bool _Enabled;
@@ -37,6 +40,8 @@ namespace WpfApp.ViewModels
         public ICommand StopCommand => _StopCommand
             ?? new LambdaCommand(OnStopCommandExecuted, CanStopCommandExecute);
 
+        public IWebServerService Server { get; }
+
         private bool CanStopCommandExecute(object p) => _Enabled;
 
         private void OnStopCommandExecuted(object p)
@@ -45,5 +50,10 @@ namespace WpfApp.ViewModels
         }
 
         #endregion
+
+        public WebServerViewModel(IWebServerService Server) => _Server = Server;
+
+
+
     }
 }
