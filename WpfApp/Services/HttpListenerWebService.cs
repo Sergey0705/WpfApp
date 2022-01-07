@@ -1,19 +1,28 @@
-﻿using WpfApp.Services.Interfaces;
+﻿using System;
+using System.IO;
+using WpfApp.Services.Interfaces;
+using WpfApp.Web;
 
 namespace WpfApp.Services
 {
     internal class HttpListenerWebService : IWebServerService
     {
-        public bool Enabled { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        private WebServer _Server = new WebServer(8080);
+        public bool Enabled { get => _Server.Enabled; set => _Server.Enabled = value; }
 
-        public void Start()
+        public void Start() => _Server.Start();
+  
+        public void Stop() => _Server.Stop();
+
+        public HttpListenerWebService()
         {
-            throw new System.NotImplementedException();
+            _Server.RequestReceived += OnRequestReceived;
         }
 
-        public void Stop()
+        private void OnRequestReceived(object sender, WebServer.RequestReceiverEventArgs e)
         {
-            throw new System.NotImplementedException();
+            using var writer = new StreamWriter(e.Context.Response.OutputStream);
+            writer.WriteLine("WpfApp Application");
         }
     }
 }
