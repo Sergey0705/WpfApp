@@ -10,7 +10,7 @@ namespace WpfApp.Web
 
     public class WebServer
     {
-        private event EventHandler<RequestReceiverEventArgs> RequestReceived;
+        public event EventHandler<RequestReceiverEventArgs> RequestReceived;
         //private TcpListener _Listener = new TcpListener(new IPEndPoint(IPAddress.Any, 8080));
 
         private HttpListener _Listener;
@@ -33,8 +33,8 @@ namespace WpfApp.Web
                 if (_Enabled) return;
 
                 _Listener = new HttpListener();
-                _Listener.Prefixes.Add($"http://*:{_Port}");
-                _Listener.Prefixes.Add($"http://+:{_Port}");
+                _Listener.Prefixes.Add($"http://*:{_Port}/");
+                _Listener.Prefixes.Add($"http://+:{_Port}/");
                 _Enabled = true;
                 ListenAsync();
             }         

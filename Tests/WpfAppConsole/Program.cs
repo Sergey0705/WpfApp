@@ -15,6 +15,7 @@ namespace WpfAppConsole
 
         static void Main(string[] args)
         {
+            WebServerTest.Run();
 
             Console.ReadLine();
         }
