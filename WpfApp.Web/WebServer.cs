@@ -6,8 +6,11 @@ using System.Text;
 
 namespace WpfApp.Web
 {
+
+
     public class WebServer
     {
+        private event EventHandler<RequestReceiverEventArgs> RequestReceived;
         //private TcpListener _Listener = new TcpListener(new IPEndPoint(IPAddress.Any, 8080));
 
         private HttpListener _Listener;
@@ -32,9 +35,9 @@ namespace WpfApp.Web
                 _Listener = new HttpListener();
                 _Listener.Prefixes.Add($"http://*:{_Port}");
                 _Listener.Prefixes.Add($"http://+:{_Port}");
-                _Enabled = true;            
-            }
-            Listen();
+                _Enabled = true;
+                ListenAsync();
+            }         
         }
 
         public void Stop()
@@ -50,8 +53,32 @@ namespace WpfApp.Web
             }  
         }
 
-        private void Listen()
+        private async void ListenAsync()
         {
+            var listener = _Listener;
+
+            listener.Start();
+
+            while (_Enabled)
+            {
+                var context = await listener.GetContextAsync().ConfigureAwait(false);
+                ProcessRequest(context);
+            }
+
+
+            listener.Stop();
+        }
+
+        private void ProcessRequest(HttpListenerContext context)
+        {
+            RequestReceived?.Invoke(this, new RequestReceiverEventArgs(context));
+        }
+
+        public class RequestReceiverEventArgs : EventArgs
+        {
+            public HttpListenerContext Context { get; }
+
+            public RequestReceiverEventArgs(HttpListenerContext context) => Context = context;
 
         }
     }
