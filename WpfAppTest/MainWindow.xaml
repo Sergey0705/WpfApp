@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:b="clr-namespace:WpfAppTest.Behaivors"
         xmlns:local="clr-namespace:WpfAppTest"
         mc:Ignorable="d"
         Title="MainWindow" Height="354" Width="224">
@@ -12,5 +14,17 @@
                 Padding="30,20"/>
 
         <TextBlock Name="ResultBlock" HorizontalAlignment="Center" VerticalAlignment="Top" Text="None"/>
+
+        <Canvas>
+            <Ellipse Canvas.Left="30" Canvas.Top="10"
+                     Stroke="Red" StrokeThickness="2"
+                     Fill="DarkBlue"
+                     Width="20" Height="20">
+                <i:Interaction.Behaviors>
+                    <!--<i:MouseDragElementBehavior/>-->
+                    <b:DragInCanvas/>
+                </i:Interaction.Behaviors>
+            </Ellipse>
+        </Canvas>
     </Grid>
 </Window>
