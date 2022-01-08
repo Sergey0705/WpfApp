@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xaml.Behaviors;
 using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,6 +12,43 @@ namespace WpfAppTest.Behaivors
     {
         private Point _StartPoint;
         private Canvas _Canvas;
+
+        #region PositionY : double - Вертикальное положение
+
+        public static readonly DependencyProperty PositionYProperty =
+            DependencyProperty.Register(
+                nameof(PositionY),
+                typeof(Double),
+                typeof(DragInCanvas),
+                new PropertyMetadata(default(double)));
+
+        [Description("Горизонтальное смещение")]
+        public Double PositionY
+        {
+            get => (Double)GetValue(PositionYProperty);
+            set => SetValue(PositionYProperty, value);
+        }
+
+        #endregion
+
+        #region PositionX : double - Горизонтальное положение
+
+        public static readonly DependencyProperty PositionXProperty =
+            DependencyProperty.Register(
+                nameof(PositionX),
+                typeof(Double),
+                typeof(DragInCanvas),
+                new PropertyMetadata(default(double)));
+
+        [Description("Горизонтальное смещение")]
+        public Double PositionX 
+        { 
+            get => (Double)GetValue(PositionXProperty);
+            set => SetValue(PositionXProperty, value);
+        }
+
+        #endregion
+
         protected override void OnAttached()
         {
             AssociatedObject.MouseLeftButtonDown += OnButtonDown;
@@ -50,6 +88,9 @@ namespace WpfAppTest.Behaivors
 
             obj.SetValue(Canvas.LeftProperty, delta.X);
             obj.SetValue(Canvas.TopProperty, delta.Y);
+
+            PositionX = delta.X;
+            PositionY = delta.Y;
         }
     }
 }
