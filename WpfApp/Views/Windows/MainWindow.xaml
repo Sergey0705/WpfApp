@@ -11,9 +11,15 @@
         xmlns:view="clr-namespace:WpfApp.Views"
         xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:sys="clr-namespace:System;assembly=System.Runtime" xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         Title="{Binding Path=Title}"
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
         Height="450" Width="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding CountriesStatistic.RefreshDataCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Window.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="Q" Command="{Binding CloseApplicationCommand}"/>
     </Window.InputBindings>

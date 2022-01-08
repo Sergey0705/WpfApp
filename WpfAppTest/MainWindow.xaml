@@ -5,16 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppTest"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Window.Resources>
-
-    </Window.Resources>
+        Title="MainWindow" Height="354" Width="224">
     <Grid>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="118,78,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="checkBox" Content="CheckBox" HorizontalAlignment="Left" Margin="179,201,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="radioButton" Content="RadioButton" HorizontalAlignment="Left" Margin="417,110,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="179,265,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Slider x:Name="slider" HorizontalAlignment="Left" Margin="461,219,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button VerticalAlignment="Center" HorizontalAlignment="Center"
+                Content="Start"
+                Padding="30,20"/>
 
+        <TextBlock Name="ResultBlock" HorizontalAlignment="Center" VerticalAlignment="Top" Text="None"/>
     </Grid>
 </Window>
