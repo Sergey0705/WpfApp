@@ -24,6 +24,7 @@ namespace WpfApp.ViewModels
         /* ----------------------------------------------------- */
 
         public CountriesStatisticViewModel CountriesStatistic { get; }
+        public WebServerViewModel WebServer { get; }
 
         /* ----------------------------------------------------- */
 
@@ -218,9 +219,10 @@ namespace WpfApp.ViewModels
 
         /* ----------------------------------------------------- */
 
-        public MainWindowViewModel(CountriesStatisticViewModel Statistic, IAsyncDataService AsyncData)
+        public MainWindowViewModel(CountriesStatisticViewModel Statistic, IAsyncDataService AsyncData, WebServerViewModel WebServer)
         {
             _AsyncData = AsyncData;
+            this.WebServer = WebServer;
             CountriesStatistic = Statistic;
             Statistic.MainModel = this;
 

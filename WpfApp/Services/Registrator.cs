@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using WpfApp.Services.Interfaces;
+using WpfApp.ViewModels;
 
 namespace WpfApp.Services
 {
@@ -13,6 +14,7 @@ namespace WpfApp.Services
             services.AddSingleton<IDataService, DataService>();
 
             services.AddTransient<IAsyncDataService, AsyncDataService>();
+            services.AddTransient<IWebServerService, HttpListenerWebService>();
 
             return services;
         }

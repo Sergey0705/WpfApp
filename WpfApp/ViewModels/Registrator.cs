@@ -11,6 +11,7 @@ namespace WpfApp.ViewModels
         {
             services.AddSingleton<CountriesStatisticViewModel>();
             services.AddSingleton<MainWindowViewModel>();
+            services.AddSingleton<WebServerViewModel>();
 
             return services;
         }
