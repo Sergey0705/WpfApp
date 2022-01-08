@@ -22,7 +22,7 @@ namespace WpfApp.Services
         private void OnRequestReceived(object sender, WebServer.RequestReceiverEventArgs e)
         {
             using var writer = new StreamWriter(e.Context.Response.OutputStream);
-            writer.WriteLine("WpfApp Application");
+            writer.WriteLine("WpfApp Application" + DateTime.Now);
         }
     }
 }
